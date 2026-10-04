@@ -7972,6 +7972,7 @@ class RbacRuleCreateRequest(BaseModel):
     predicate: str = Field(..., min_length=1, description="CPEX APL predicate")
     effect: str = Field(..., description="allow or deny")
     priority: int = Field(100, ge=0, le=10000, description="Evaluation priority")
+    expires_at: Optional[datetime] = Field(None, description="When this rule stops being enforced")
 
 
 class RbacRuleUpdateRequest(BaseModel):
@@ -7996,6 +7997,7 @@ class RbacRuleUpdateRequest(BaseModel):
     effect: Optional[str] = Field(None, description="allow or deny")
     priority: Optional[int] = Field(None, ge=0, le=10000, description="Evaluation priority")
     is_active: Optional[bool] = Field(None, description="Whether the rule participates in evaluation")
+    expires_at: Optional[datetime] = Field(None, description="When this rule stops being enforced")
 
 
 class RbacRuleResponse(BaseModel):
@@ -8033,6 +8035,7 @@ class RbacRuleResponse(BaseModel):
     priority: int
     is_active: bool
     is_system: bool
+    expires_at: Optional[datetime]
     created_by: Optional[str]
     created_at: datetime
     updated_at: Optional[datetime]
